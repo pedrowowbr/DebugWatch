@@ -8,7 +8,7 @@ Este projeto tem como objetivo monitorar e visualizar o tempo de execução das 
 
 Python (FastAPI ou Flask)
 
-SQLAlchemy (para conexão com banco de dados)
+SQLServer(para conexão com banco de dados)
 
 Pandas (para manipulação de dados)
 
@@ -29,43 +29,33 @@ PostgreSQL ou MySQL (dependendo do que já está sendo utilizado)
 🚀 Como Rodar o Projeto
 1️⃣ Clonar o Repositório
 bash
-Copiar
-Editar
+
+
 git clone https://github.com/seu-usuario/nome-do-projeto.git
 cd nome-do-projeto
 2️⃣ Configurar o Back-end (Python)
 Criar e ativar um ambiente virtual:
 
 bash
-Copiar
-Editar
+
+
 python -m venv venv
 source venv/bin/activate  # No Windows: venv\Scripts\activate
 Instalar as dependências:
 
 bash
-Copiar
-Editar
+
+
 pip install -r requirements.txt
 Rodar o servidor:
-
-bash
-Copiar
-Editar
 uvicorn app:main --reload  # Se estiver usando FastAPI
+
 3️⃣ Configurar o Front-end (React)
 Instalar as dependências:
-
-bash
-Copiar
-Editar
 cd frontend
 npm install
 Rodar o projeto React:
 
-bash
-Copiar
-Editar
 npm start
 📊 Funcionalidades
 ✔️ Listagem de clientes e tempos de execução das integrações
