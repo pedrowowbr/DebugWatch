@@ -24,27 +24,19 @@ Axios (para consumir a API)
 
 📌 Banco de Dados:
 
-PostgreSQL ou MySQL (dependendo do que já está sendo utilizado)
+SQLServer
 
 🚀 Como Rodar o Projeto
 1️⃣ Clonar o Repositório
-bash
-
 
 git clone https://github.com/seu-usuario/nome-do-projeto.git
-cd nome-do-projeto
+cd debug-watch
 2️⃣ Configurar o Back-end (Python)
 Criar e ativar um ambiente virtual:
-
-bash
-
 
 python -m venv venv
 source venv/bin/activate  # No Windows: venv\Scripts\activate
 Instalar as dependências:
-
-bash
-
 
 pip install -r requirements.txt
 Rodar o servidor:
