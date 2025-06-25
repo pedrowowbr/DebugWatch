@@ -6,7 +6,7 @@ Este projeto tem como objetivo monitorar e visualizar o tempo de execução das 
 🛠 Tecnologias Utilizadas
 📌 Back-end:
 
-Python (FastAPI ou Flask)
+Python (FastAPI)
 
 SQLServer(para conexão com banco de dados)
 
