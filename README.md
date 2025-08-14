@@ -27,7 +27,11 @@ Axios (para consumir a API)
 PostgreSQL
 
 📊 Funcionalidades
+
 ✔️ Listagem de clientes e tempos de execução das integrações
+
 ✔️ Geração de gráficos sobre tempos de debug 
+
 ✔️ API para consulta e análise dos logs
+
 ✔️ Interface interativa para visualização dos dados
