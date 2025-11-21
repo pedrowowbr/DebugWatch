@@ -1,37 +1,90 @@
-# DebugWatch
+# 📊 DebugWatch
 
-📖 Descrição
-Este projeto tem como objetivo monitorar e visualizar o tempo de execução das integrações de cada cliente. É enviado os logs com as métricas para a API, é utilizado o banco de dados para armazenar os logs, monitoramento de banco de dados para caso ter algum incidente e depois é gerado os gráficos para filtrar e ter uma média
+Sistema de monitoramento e visualização de métricas de tempo de execução para múltiplos clientes com autenticação JWT e dashboard interativo.
 
-🛠 Tecnologias Utilizadas
-📌 Back-end:
+## 🚀 Tecnologias
 
-Python (FastAPI)
+### Backend
+- **FastAPI** 0.116.0
+- **PostgreSQL** (psycopg2-binary 2.9.9)
+- **SQLAlchemy** 2.0.23
+- **Python-Jose** 3.3.0 (JWT)
+- **Python-dotenv** 1.0.0
+- **Uvicorn** 0.35.0
 
-PostgreSQL(para conexão com banco de dados)
+### Frontend
+- **React** 19.1.0
+- **Chart.js** 4.5.1
+- **react-chartjs-2** 5.3.1
 
-Pandas (para manipulação de dados)
+## ⚙️ Configuração
 
-Matplotlib/Seaborn (para geração de gráficos)
+### 1. Backend
 
-📌 Front-end:
+```bash
+cd backend
 
-React
+# Criar ambiente virtual
+python -m venv venv
+venv\Scripts\activate  # Windows
 
-Recharts (para gráficos interativos)
+# Instalar dependências
+pip install -r requirements.txt
 
-Axios (para consumir a API)
+# Configurar variáveis de ambiente
+# Copiar .env.example para .env e preencher:
+# - DATABASE_URL=postgresql://usuario:senha@localhost/monitoramento
+# - JWT_SECRET_KEY=sua_chave_secreta_aqui
+```
 
-📌 Banco de Dados:
+### 2. Banco de Dados PostgreSQL
 
-PostgreSQL
+```sql
+CREATE DATABASE monitoramento;
+```
 
-📊 Funcionalidades
+### 3. Frontend
 
-✔️ Listagem de clientes e tempos de execução das integrações
+```bash
+cd frontend
 
-✔️ Geração de gráficos sobre tempos de debug 
+# Instalar dependências
+npm install
+```
 
-✔️ API para consulta e análise dos logs
+## ▶️ Executar
 
-✔️ Interface interativa para visualização dos dados
+### Backend
+```bash
+cd backend
+uvicorn main:app --reload
+# API rodando em http://localhost:8000
+```
+
+### Frontend
+```bash
+cd frontend
+npm start
+# Interface rodando em http://localhost:3000
+```
+
+## 📌 Funcionalidades
+
+- ✅ Autenticação JWT com sistema de permissões
+- ✅ Dashboard com gráficos interativos (Chart.js)
+- ✅ Visão Admin para monitorar todos os clientes
+- ✅ Métricas agrupadas por cliente
+- ✅ Gráficos de tempo de execução e tendências
+- ✅ Auto-refresh a cada 10 segundos
+- ✅ Estatísticas em tempo real
+
+## 👤 Usuários
+
+- **Cliente padrão**: Visualiza apenas suas métricas
+- **Admin**: Acesso a todas as métricas e comparações entre clientes
+
+## 🔒 Segurança
+
+- Senhas hashadas com PBKDF2-HMAC SHA256
+- Tokens JWT com expiração de 30 minutos
+- Variáveis de ambiente para dados sensíveis
