@@ -99,20 +99,32 @@ class ApiService {
 
     // Obter métricas do usuário
     async getMyMetrics() {
+        console.log('📡 Requisitando métricas...');
+        console.log('🔑 Token:', this.token ? 'Presente' : 'Ausente');
+        console.log('📝 Headers:', this.getHeaders());
+
         const response = await fetch(`${API_BASE_URL}/metrics`, {
             headers: this.getHeaders(),
         });
 
+        console.log('📥 Response status:', response.status);
+
         if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Erro na resposta:', errorText);
             throw new Error('Erro ao obter métricas');
         }
 
-        return response.json();
+        const data = await response.json();
+        console.log('✅ Dados recebidos:', data);
+        return data;
     }
 
-    // Obter todas as métricas (público)
+    // Obter todas as métricas (apenas para admins)
     async getAllMetrics() {
-        const response = await fetch(`${API_BASE_URL}/metrics/all`);
+        const response = await fetch(`${API_BASE_URL}/metrics/all`, {
+            headers: this.getHeaders(),
+        });
 
         if (!response.ok) {
             throw new Error('Erro ao obter todas as métricas');

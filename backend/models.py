@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, Interval, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Interval, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
-from .database import Base
+from database import Base
 
 
 class Cliente(Base):
@@ -10,6 +10,7 @@ class Cliente(Base):
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String, unique=True, index=True)
     senha_hash = Column(String)
+    is_admin = Column(Boolean, default=False)
     data_criacao = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Relacionamento com métricas

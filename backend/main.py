@@ -3,7 +3,16 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from . import models, database, auth, schemas
+from dotenv import load_dotenv
+
+# Carrega variáveis de ambiente do arquivo .env
+load_dotenv()
+
+import models
+import database
+import auth
+import schemas
+
 
 app = FastAPI(title="DebugWatch API",
               description="API para monitoramento de métricas com autenticação JWT")
@@ -133,7 +142,7 @@ def list_my_metrics(
         print(
             f"Usuário autenticado: {current_user.nome} (ID: {current_user.id})")
 
-        metrics = db.query(models.Metric).filter(
+        metrics = db.query(models.Metric).join(models.Cliente).filter(
             models.Metric.cliente_id == current_user.id).all()
         print(f"Métricas encontradas: {len(metrics)}")
 
@@ -149,14 +158,28 @@ def list_my_metrics(
 
 
 @app.get("/metrics/all", response_model=list[schemas.MetricResponse])
-def list_all_metrics(db: Session = Depends(database.get_db)):
-    """Lista todas as métricas (endpoint público para admin)"""
+def list_all_metrics(
+    token: str = Depends(oauth2_scheme),
+    db: Session = Depends(database.get_db)
+):
+    """Lista todas as métricas (apenas para admins)"""
     try:
-        metrics = db.query(models.Metric).all()
+        # Verifica se o usuário é admin
+        current_user = auth.get_current_user(token, db)
+        if not current_user.is_admin:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Acesso negado. Apenas administradores podem visualizar todas as métricas."
+            )
+
+        # Faz join com a tabela de clientes para ter o nome
+        metrics = db.query(models.Metric).join(models.Cliente).all()
         # Converte usando o schema personalizado
         result = [schemas.MetricResponse.from_orm(
             metric) for metric in metrics]
         return result
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
 

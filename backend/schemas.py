@@ -11,6 +11,7 @@ class ClienteCreate(BaseModel):
 class ClienteResponse(BaseModel):
     id: int
     nome: str
+    is_admin: bool
     data_criacao: datetime
 
     class Config:
@@ -32,6 +33,8 @@ class MetricCreate(BaseModel):
 
 class MetricResponse(BaseModel):
     id: int
+    cliente_id: int
+    cliente_nome: str
     tempo_execucao: str
     data_criacao: datetime
 
@@ -52,6 +55,8 @@ class MetricResponse(BaseModel):
 
         return cls(
             id=obj.id,
+            cliente_id=obj.cliente_id,
+            cliente_nome=obj.cliente.nome if obj.cliente else "Desconhecido",
             tempo_execucao=tempo_str,
             data_criacao=obj.data_criacao
         )

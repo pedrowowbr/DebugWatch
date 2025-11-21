@@ -1,0 +1,29 @@
+# Ambientes virtuais Python
+venv/
+.venv/
+env/
+ENV/
+
+# Arquivos de ambiente (SENSÍVEL)
+.env
+.env.local
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Banco de dados local
+*.db
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
