@@ -108,6 +108,7 @@ pip install -r requirements.txt
 ```sql
 CREATE DATABASE monitoramento;
 ```
+> **Nota**: As tabelas `clientes` e `metrics` são criadas automaticamente pelo SQLAlchemy ao iniciar o backend pela primeira vez.
 
 ### 3. Frontend
 
