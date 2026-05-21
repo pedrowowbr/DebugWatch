@@ -1,13 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import os
 
-SQLALCHEMY_DATABASE_URL = os.getenv(
-    "DATABASE_URL", "postgresql://postgres:senha@localhost/monitoramento")
+import config
+
 
 # Cria a engine (conexão com banco)
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine = create_engine(config.DATABASE_URL)
 
 # Cria a sessão (cada request abre uma sessão com o banco)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

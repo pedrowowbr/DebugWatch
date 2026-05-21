@@ -5,18 +5,15 @@ from fastapi.security import HTTPBearer
 from jose import JWTError, jwt
 import hashlib
 import secrets
-import os
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Cliente
+import config
 
 # Configurações do JWT
-SECRET_KEY = os.getenv("JWT_SECRET_KEY")
-if not SECRET_KEY:
-    raise ValueError("JWT_SECRET_KEY não configurado no .env!")
-ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(
-    os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
+SECRET_KEY = config.JWT_SECRET_KEY
+ALGORITHM = config.JWT_ALGORITHM
+ACCESS_TOKEN_EXPIRE_MINUTES = config.JWT_ACCESS_TOKEN_EXPIRE_MINUTES
 
 security = HTTPBearer()
 
